@@ -1,0 +1,37 @@
+---
+import Layout   from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+
+<Layout
+  title="Blog — Level Up"
+  description="Feminist thinking, analysis, and stories from the Level Up community."
+>
+  <!-- Header -->
+  <section class="bg-black px-16 py-24">
+    <div class="section-label">Writing & Analysis</div>
+    <h1 class="text-8xl font-bold tracking-tight2 leading-display text-white mt-2">
+      The Blog
+    </h1>
+  </section>
+
+  <!-- Grid -->
+  <section class="bg-warm px-16 py-16">
+    <div class="grid lg:grid-cols-3 gap-px stagger">
+      {posts.map((post, i) => (
+        <BlogCard
+          title={post.data.title}
+          author={post.data.author}
+          date={post.data.date}
+          excerpt={post.data.excerpt}
+          href={`/blog/${post.slug}`}
+          featured={i === 0}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>

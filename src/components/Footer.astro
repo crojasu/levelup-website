@@ -1,0 +1,72 @@
+---
+const campaigns = [
+  { label: '#NoMoreLyes', href: '/active-campaigns/nomorelyes' },
+  { label: 'Pregnancy in Prison', href: '/active-campaigns/pregnancy-in-prison' },
+  { label: 'Abortion is Healthcare', href: '/active-campaigns/abortion-is-healthcare' },
+  { label: 'Media Guidelines', href: '/active-campaigns/media-guidelines-domestic-abuse' },
+  { label: 'Sexual Violence in Football', href: '/active-campaigns/sexual-violence-in-football' },
+  { label: 'We Protect Us', href: '/active-campaigns/we-protect-us' },
+];
+---
+
+<footer class="bg-navy text-cream">
+  <!-- Main footer -->
+  <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+    <!-- Brand -->
+    <div class="md:col-span-1">
+      <a href="/" class="flex items-center gap-1 font-bold text-lg mb-4">
+        <span class="text-cream">WE</span>
+        <span class="bg-lime text-navy px-1">LEVEL UP</span>
+      </a>
+      <p class="text-cream/70 text-sm leading-relaxed">
+        A feminist community campaigning for gender justice in the UK.
+      </p>
+    </div>
+
+    <!-- Campaigns -->
+    <div>
+      <h3 class="text-lime font-semibold uppercase tracking-widest text-xs mb-4">Campaigns</h3>
+      <ul class="space-y-2">
+        {campaigns.map(c => (
+          <li>
+            <a href={c.href} class="text-cream/70 text-sm hover:text-lime transition-colors">{c.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Links -->
+    <div>
+      <h3 class="text-lime font-semibold uppercase tracking-widest text-xs mb-4">Organisation</h3>
+      <ul class="space-y-2">
+        <li><a href="/about-us" class="text-cream/70 text-sm hover:text-lime transition-colors">About Us</a></li>
+        <li><a href="/blog" class="text-cream/70 text-sm hover:text-lime transition-colors">Blog</a></li>
+        <li><a href="/press" class="text-cream/70 text-sm hover:text-lime transition-colors">Press</a></li>
+        <li><a href="/all-resources" class="text-cream/70 text-sm hover:text-lime transition-colors">Resources</a></li>
+        <li><a href="/contact" class="text-cream/70 text-sm hover:text-lime transition-colors">Contact</a></li>
+        <li><a href="/donate" class="text-cream/70 text-sm hover:text-lime transition-colors">Donate</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h3 class="text-lime font-semibold uppercase tracking-widest text-xs mb-4">Get in Touch</h3>
+      <p class="text-cream/70 text-sm mb-3">
+        <a href="mailto:hello@welevelup.org" class="hover:text-lime transition-colors">hello@welevelup.org</a>
+      </p>
+      <div class="flex gap-4 mt-4">
+        <a href="https://twitter.com/welevelupuk" target="_blank" rel="noopener" class="text-cream/70 hover:text-lime text-sm transition-colors">Twitter</a>
+        <a href="https://instagram.com/welevelupuk" target="_blank" rel="noopener" class="text-cream/70 hover:text-lime text-sm transition-colors">Instagram</a>
+        <a href="https://www.facebook.com/welevelupuk" target="_blank" rel="noopener" class="text-cream/70 hover:text-lime text-sm transition-colors">Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-cream/10">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-2">
+      <p class="text-cream/50 text-xs">© {new Date().getFullYear()} Level Up. Registered Charity in England and Wales.</p>
+      <p class="text-cream/50 text-xs">Feminist community campaigning for gender justice in the UK</p>
+    </div>
+  </div>
+</footer>

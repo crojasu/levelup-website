@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const campaigns = await getCollection('campaigns');
+  return campaigns.map(c => ({ params: { slug: c.slug } }));
+}
+
+const { slug }    = Astro.params;
+const campaign    = await getEntry('campaigns', slug as string);
+if (!campaign) return Astro.redirect('/our-work');
+
+const { Content } = await campaign.render();
+const { title, excerpt, supporters, petitionUrl, emoji, status } = campaign.data;
+---
+
+<Layout
+  title={`${title} — Level Up`}
+  description={excerpt}
+>
+  <!-- Header -->
+  <section class="bg-black px-16 py-24">
+    <div class="max-w-3xl">
+      <div class="section-label mb-6">{status} Campaign</div>
+      <h1 class="text-6xl font-bold tracking-tight2 leading-display text-white mb-8">
+        {emoji && <span class="mr-3">{emoji}</span>}{title}
+      </h1>
+      <p class="text-xl font-light text-white/60 tracking-tight2 leading-relaxed2 mb-10 max-w-xl">
+        {excerpt}
+      </p>
+      <div class="flex flex-wrap gap-4 items-center">
+        {petitionUrl && (
+          <a href={petitionUrl} class="btn-primary">Sign the Petition →</a>
+        )}
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl font-bold text-white tracking-tight2 leading-display">{supporters}</span>
+          <span class="text-xs text-white/40 uppercase tracking-widest2">supporters</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <article class="bg-warm px-16 py-20">
+    <div class="max-w-2xl prose-levelup">
+      <Content />
+    </div>
+  </article>
+
+  <!-- Back -->
+  <div class="bg-warm px-16 pb-20">
+    <a href="/our-work" class="btn-outline-dark">← All Campaigns</a>
+  </div>
+</Layout>

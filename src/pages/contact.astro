@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Contact — Level Up"
+  description="Get in touch with Level Up — a feminist community campaigning for gender justice in the UK."
+>
+  <section class="bg-black px-16 py-24">
+    <div class="section-label">Get In Touch</div>
+    <h1 class="text-8xl font-bold tracking-tight2 leading-display text-white mt-2">Contact</h1>
+  </section>
+
+  <section class="bg-warm px-16 py-24 grid lg:grid-cols-2 gap-20 fade-up">
+    <div>
+      <h2 class="text-4xl font-bold tracking-tight2 leading-display mb-8">Say hello</h2>
+      <p class="text-lg font-light text-[#444] tracking-tight2 leading-relaxed2 mb-8">
+        For media enquiries, campaign collaborations, or general questions, reach us at:
+      </p>
+      <a href="mailto:hello@welevelup.org"
+         class="text-2xl font-semibold text-red-brand tracking-tight2 no-underline hover:underline">
+        hello@welevelup.org
+      </a>
+      <p class="text-base font-light text-[#444] tracking-tight2 leading-relaxed2 mt-10">
+        New Derwent House<br />69–73 Theobalds Road<br />London WC1X 8TA
+      </p>
+    </div>
+    <div>
+      <h3 class="text-2xl font-bold tracking-tight2 leading-display mb-6">Follow us</h3>
+      <div class="flex flex-col gap-4">
+        {[
+          { label: 'Facebook',  href: 'https://www.facebook.com/levelupaction', handle: '@levelupaction' },
+          { label: 'X / Twitter',href: 'https://x.com/we_level_up',           handle: '@we_level_up' },
+          { label: 'Instagram', href: 'https://www.instagram.com/levelup_uk/', handle: '@levelup_uk' },
+        ].map(s => (
+          <a href={s.href} class="flex items-center justify-between bg-white p-5 no-underline group hover:bg-offwhite transition-colors border-l-[3px] border-transparent hover:border-red-brand">
+            <span class="font-semibold text-black tracking-tight2">{s.label}</span>
+            <span class="text-sm text-muted tracking-tight2 group-hover:text-red-brand transition-colors">{s.handle} →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,42 @@
+---
+const navLinks = [
+  { label: 'About Us', href: '/about-us' },
+  { label: 'Campaigns', href: '/our-work' },
+  { label: 'Resources', href: '/all-resources' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Press', href: '/press' },
+  { label: 'Community', href: '#community' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<header class="bg-cream border-b border-navy/10 sticky top-0 z-50">
+  <nav class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-1 font-bold text-navy tracking-tight text-lg">
+      <span>WE</span>
+      <span class="bg-lime text-navy px-1">LEVEL UP</span>
+    </a>
+
+    <!-- Nav links -->
+    <ul class="hidden lg:flex items-center gap-6">
+      {navLinks.map(link => (
+        <li>
+          <a href={link.href} class="text-navy text-sm font-medium hover:opacity-70 uppercase tracking-wide transition-opacity">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTAs -->
+    <div class="flex items-center gap-3">
+      <a href="/contact" class="hidden md:block text-sm font-semibold text-navy border border-navy px-4 py-2 hover:bg-navy hover:text-cream transition-colors uppercase tracking-wide">
+        Join Us
+      </a>
+      <a href="/donate" class="text-sm font-semibold bg-navy text-lime px-4 py-2 hover:bg-navy/80 transition-colors uppercase tracking-wide">
+        Donate
+      </a>
+    </div>
+  </nav>
+</header>

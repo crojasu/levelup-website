@@ -1,0 +1,31 @@
+---
+interface Props {
+  title:      string;
+  supporters: string;
+  href:       string;
+  image?:     string;
+  featured?:  boolean;
+  status?:    string;
+}
+const { title, supporters, href, image, featured = false } = Astro.props;
+---
+<a href={href} class="group block no-underline border-4 border-lime bg-navy overflow-hidden hover:border-cream transition-colors">
+  <div class="relative overflow-hidden" style={featured ? 'height:280px' : 'height:220px'}>
+    {image
+      ? <img src={image} alt={title} class="w-full h-full object-cover" loading="lazy" />
+      : <div class="w-full h-full bg-navy/80 flex items-center justify-center">
+          <span class="text-lime/20 text-8xl font-black">LU</span>
+        </div>
+    }
+    <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>
+  </div>
+  <div class="p-6 bg-lime">
+    <h3 class="text-navy font-bold text-lg tracking-tight2 leading-display mb-3 group-hover:underline">
+      {title}
+    </h3>
+    <div class="flex items-center gap-2 text-navy/70 text-xs font-semibold uppercase tracking-widest2">
+      <span>👤</span>
+      <span>{supporters} supporters</span>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,242 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const campaigns = (await getCollection('campaigns')).sort((a, b) => a.data.order - b.data.order);
+const posts = (await getCollection('blog'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 4);
+
+const ticker = [
+  'Gender Justice Now', 'Media Guidelines on Domestic Abuse', 'Abortion is Healthcare',
+  'Pregnancy in Prison', 'Sexual Violence in Football', 'No More Lyes', 'We Protect Us'
+];
+---
+
+<Layout title="We Level Up | Feminist Community Campaigning for Gender Justice">
+
+  <!-- ── HERO ─────────────────────────────────────────────────────────── -->
+  <section class="relative min-h-[90vh] flex items-center bg-navy overflow-hidden">
+    <!-- Background image overlay -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/nomorelyes-hero.jpg"
+        alt="No More Lyes campaign"
+        class="w-full h-full object-cover object-center opacity-60"
+        onerror="this.style.display='none'"
+      />
+      <div class="absolute inset-0 bg-navy/50"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-24">
+      <p class="text-lime font-semibold uppercase tracking-widest text-sm mb-4">
+        We are a feminist community campaigning for gender justice in the UK.<br/>
+        Take action on our latest campaign:
+      </p>
+      <h1 class="text-lime font-black leading-none mb-8" style="font-size: clamp(4rem, 12vw, 10rem); letter-spacing: -0.03em;">
+        #NO MORE<br/>LYES
+      </h1>
+      <div class="flex flex-wrap gap-4 mb-8">
+        <a href="https://levelup.yourmovement.org/p/no-more-lyes" target="_blank"
+          class="bg-lime text-navy font-bold px-8 py-4 text-sm uppercase tracking-widest hover:bg-lime/90 transition-colors">
+          Sign the Petition
+        </a>
+        <a href="https://welevelup.org/nomorelyes-open-letter-to-loreal/" target="_blank"
+          class="border-2 border-lime text-lime font-bold px-8 py-4 text-sm uppercase tracking-widest hover:bg-lime hover:text-navy transition-colors">
+          Sign the Open Letter
+        </a>
+      </div>
+      <p class="text-lime text-lg font-medium max-w-xl leading-relaxed">
+        Big beauty brands like L'Oréal must remove toxic ingredients from hair relaxers.<br/>
+        The price of Black women's beauty should never be our health.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── TICKER ─────────────────────────────────────────────────────── -->
+  <div class="bg-navy py-3 overflow-hidden border-t border-cream/10">
+    <div class="flex gap-12 whitespace-nowrap animate-marquee">
+      {[...ticker, ...ticker, ...ticker].map(item => (
+        <span class="text-lime text-sm font-semibold uppercase tracking-widest flex-shrink-0">
+          {item} &nbsp;★
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- ── WHO WE ARE ──────────────────────────────────────────────────── -->
+  <section class="bg-cream py-24">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="font-black text-navy leading-none" style="font-size: clamp(5rem, 14vw, 11rem); letter-spacing: -0.04em; line-height: 0.9;">
+          WHO<br/>WE<br/>ARE
+        </h2>
+      </div>
+      <div class="space-y-5 text-navy">
+        <p class="text-base leading-relaxed">
+          We create digital tools and campaigns that interrupt cultural moments to fight for gender justice —
+          <a href="/our-work" class="text-purple underline hover:text-navy transition-colors">
+            like flying a plane banner over a football match to break the silence around rape in sports, pushing ITV to drop plastic surgery adverts from Love Island and producing the UK's first media guidelines on reporting domestic abuse deaths.
+          </a>
+        </p>
+        <p class="text-base leading-relaxed">
+          We're working towards a world where people of all genders are loved and liberated from bodily and systemic violence. We do this in our campaign coalitions, and through gathering with community like our
+          <a href="/active-campaigns/we-protect-us" class="text-purple underline hover:text-navy transition-colors">monthly workshops on bystander intervention and intervening in police violence.</a>
+        </p>
+        <p class="text-base leading-relaxed">
+          Our movement includes feminists from a range of backgrounds and all genders, centering the voices and liberation of people who experience gender injustice: women, gender-nonconforming and trans people.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TED TALK ────────────────────────────────────────────────────── -->
+  <section class="bg-cream py-16 border-t border-navy/10">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="font-bold text-navy uppercase tracking-widest text-sm mb-8">
+        HOW COLLECTIVE CARE CAN CHANGE SOCIETY
+      </h2>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div class="lg:col-span-2">
+          <div class="relative w-full" style="padding-bottom: 56.25%;">
+            <iframe
+              src="https://www.youtube.com/embed/LJ_SBkzcsBA"
+              title="How collective care can change society | Janey Starling & Seyi Falodun-Liburd"
+              class="absolute inset-0 w-full h-full"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        <div class="text-navy">
+          <p class="text-base leading-relaxed">
+            Level Up's vision is a world where everyone is loved and liberated. We believe that collective care is the route to building this world. Level Up co-directors Seyi and Janey explained what this means in a TedxLondon talk in March 2023.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NEXT EVENT ──────────────────────────────────────────────────── -->
+  <section class="bg-cream py-16 border-t border-navy/10">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="font-black text-navy text-center uppercase mb-10" style="font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.02em;">
+        NEXT EVENT
+      </h2>
+      <div class="border border-navy/20 p-8 text-center text-navy/60">
+        There are no upcoming events right now. Subscribe to our mailing list to stay updated.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SIGN OUR PETITIONS ─────────────────────────────────────────── -->
+  <section class="bg-navy py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="font-black text-lime text-center uppercase mb-16" style="font-size: clamp(2.5rem, 8vw, 6rem); letter-spacing: -0.03em;">
+        SIGN OUR PETITIONS
+      </h2>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {campaigns.map(campaign => (
+          <a href={campaign.data.petitionUrl} target="_blank" rel="noopener"
+            class="bg-lime p-0 group hover:bg-lime/90 transition-colors block">
+            <!-- Image area -->
+            <div class="relative aspect-square overflow-hidden bg-navy/20">
+              <img
+                src={`/images/campaigns/${campaign.slug}.jpg`}
+                alt={campaign.data.title}
+                class="w-full h-full object-cover"
+                onerror="this.style.display='none'; this.parentElement.classList.add('flex','items-center','justify-center')"
+              />
+              <!-- Cross overlay like the real site -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div class="w-16 h-16 bg-navy/80 flex items-center justify-center">
+                  <span class="text-lime text-3xl">→</span>
+                </div>
+              </div>
+            </div>
+            <!-- Card info -->
+            <div class="p-4">
+              <h3 class="font-bold text-navy text-sm leading-tight mb-2">{campaign.data.title}</h3>
+              <p class="text-navy/70 text-xs flex items-center gap-1">
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                </svg>
+                {campaign.data.supporters} supporters
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="text-center">
+        <a href="/our-work" class="inline-block bg-lime text-navy font-bold px-10 py-4 uppercase tracking-widest text-sm hover:bg-lime/90 transition-colors">
+          See More →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FROM THE BLOG ───────────────────────────────────────────────── -->
+  <section class="bg-lavender py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="font-black text-navy text-center uppercase mb-16" style="font-size: clamp(2.5rem, 8vw, 5rem); letter-spacing: -0.03em;">
+        FROM THE BLOG
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {posts.map(post => (
+          <a href={`/blog/${post.slug}`}
+            class="bg-lime p-5 group hover:bg-lime/90 transition-colors block">
+            <!-- Author -->
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-6 h-6 rounded-full bg-navy flex items-center justify-center">
+                <span class="text-lime text-xs font-bold">{post.data.author?.charAt(0) || 'L'}</span>
+              </div>
+              <span class="text-navy text-xs font-medium">{post.data.author}</span>
+            </div>
+            <!-- Title -->
+            <h3 class="font-bold text-navy text-base leading-tight mb-3 group-hover:underline">
+              {post.data.title}
+            </h3>
+            <!-- Excerpt -->
+            {post.data.excerpt && (
+              <p class="text-navy/70 text-sm leading-relaxed line-clamp-4">
+                {post.data.excerpt}
+              </p>
+            )}
+            <!-- Date -->
+            <p class="text-navy/50 text-xs mt-4">
+              {new Date(post.data.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </p>
+          </a>
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/blog" class="inline-block border-2 border-navy text-navy font-bold px-10 py-4 uppercase tracking-widest text-sm hover:bg-navy hover:text-cream transition-colors">
+          See All Posts →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── JOIN CTA ────────────────────────────────────────────────────── -->
+  <section class="bg-navy py-24 text-center">
+    <h2 class="font-black text-lime uppercase mb-8" style="font-size: clamp(2rem, 7vw, 5rem); letter-spacing: -0.03em;">
+      JOIN THE LEVEL UP COMMUNITY
+    </h2>
+    <a href="/contact" class="inline-block border-2 border-lime text-lime font-bold px-10 py-4 uppercase tracking-widest text-sm hover:bg-lime hover:text-navy transition-colors">
+      Join Us →
+    </a>
+  </section>
+
+</Layout>
+
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.33%); }
+  }
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+</style>

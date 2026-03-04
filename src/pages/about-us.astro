@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="About Us — Level Up"
+  description="Level Up is a feminist community using digital tools and collective action to fight for gender justice in the UK."
+>
+  <!-- Header -->
+  <section class="bg-black px-16 py-24">
+    <div class="section-label">About Level Up</div>
+    <h1 class="text-8xl font-bold tracking-tight2 leading-display text-white mt-2 max-w-2xl">
+      Who We Are
+    </h1>
+  </section>
+
+  <!-- What we do -->
+  <section class="bg-warm px-16 py-24 grid lg:grid-cols-2 gap-20 items-start fade-up">
+    <div>
+      <div class="section-label">What We Do</div>
+      <h2 class="text-5xl font-bold tracking-tight2 leading-display mb-8">Digital tools for gender justice</h2>
+      <p class="text-lg font-light text-[#444] tracking-tight2 leading-relaxed2 mb-5">
+        We create digital tools and campaigns that interrupt cultural moments to fight for gender justice. We've flown plane banners over Premier League matches, pushed major broadcasters to change their advertising practices, and produced the UK's first media guidelines on reporting domestic abuse deaths.
+      </p>
+      <p class="text-lg font-light text-[#444] tracking-tight2 leading-relaxed2 mb-5">
+        We're working towards a world where people of all genders are loved and liberated from bodily and systemic violence — through campaign coalitions and by gathering community.
+      </p>
+      <p class="text-lg font-light text-[#444] tracking-tight2 leading-relaxed2">
+        Our movement includes feminists from a range of backgrounds and all genders, centering the voices and liberation of women, gender-nonconforming and trans people.
+      </p>
+    </div>
+    <div class="flex flex-col gap-5 stagger">
+      {[
+        { title: 'Intersectional',    desc: 'We centre the most marginalised and resist single-axis politics.' },
+        { title: 'People-powered',    desc: 'Our campaigns are driven by community, not institutions.' },
+        { title: 'Digital-first',     desc: 'We use technology to amplify impact and reach.' },
+        { title: 'Abolitionist',      desc: 'We believe in building community safety, not expanding carceral systems.' },
+      ].map(v => (
+        <div class="bg-offwhite p-8 border-l-[3px] border-red-brand">
+          <div class="font-semibold text-base text-black tracking-tight2 mb-2">{v.title}</div>
+          <p class="text-sm text-muted font-light tracking-tight2 leading-relaxed2">{v.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Vision -->
+  <section class="bg-black px-16 py-24 fade-up">
+    <div class="max-w-3xl">
+      <div class="section-label">Our Vision</div>
+      <h2 class="text-5xl font-bold tracking-tight2 leading-display text-white mb-8">
+        Collective care can change society
+      </h2>
+      <p class="text-xl font-light text-white/60 tracking-tight2 leading-relaxed2 mb-8">
+        Level Up's vision is a world where everyone is loved and liberated. We believe that collective care is the route to building this world.
+      </p>
+      <a href="https://www.ted.com/talks" class="btn-primary">Watch Our TEDxLondon Talk →</a>
+    </div>
+  </section>
+</Layout>

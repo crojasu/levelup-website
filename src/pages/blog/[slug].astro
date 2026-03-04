@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(p => ({ params: { slug: p.slug } }));
+}
+
+const { slug }  = Astro.params;
+const post      = await getEntry('blog', slug as string);
+if (!post) return Astro.redirect('/blog');
+
+const { Content }  = await post.render();
+const { title, author, date, excerpt } = post.data;
+
+const formatted = new Date(date).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric'
+});
+---
+
+<Layout
+  title={`${title} — Level Up`}
+  description={excerpt}
+  type="article"
+  publishDate={date}
+  author={author}
+>
+  <!-- Hero -->
+  <section class="bg-black px-16 py-24">
+    <div class="max-w-3xl">
+      <div class="section-label mb-6">Blog</div>
+      <h1 class="text-6xl font-bold tracking-tight2 leading-display text-white mb-8">{title}</h1>
+      <div class="flex items-center gap-6 text-xs uppercase tracking-widest2">
+        <span class="text-red-brand font-semibold">{author}</span>
+        <span class="text-white/40">{formatted}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <article class="bg-warm px-16 py-20">
+    <div class="max-w-2xl prose-levelup">
+      <Content />
+    </div>
+  </article>
+
+  <!-- Back -->
+  <div class="bg-warm px-16 pb-20">
+    <a href="/blog" class="btn-outline-dark">← Back to Blog</a>
+  </div>
+</Layout>

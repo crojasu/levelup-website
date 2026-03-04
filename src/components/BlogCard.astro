@@ -1,0 +1,35 @@
+---
+interface Props {
+  title:    string;
+  author:   string;
+  date:     string;
+  excerpt:  string;
+  href:     string;
+  image?:   string;
+  featured?: boolean;
+}
+const { title, author, date, excerpt, href, image, featured = false } = Astro.props;
+const formatted = new Date(date).toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+---
+<a href={href} class:list={['group block no-underline overflow-hidden', image ? 'bg-cream' : 'bg-lime']}>
+  {image && (
+    <div class="overflow-hidden" style="height:200px">
+      <img src={image} alt={title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+    </div>
+  )}
+  <div class="p-7">
+    <div class="text-xs font-bold uppercase tracking-widest2 mb-3" class:list={[image ? 'text-purple' : 'text-navy/60']}>
+      {author} · {formatted}
+    </div>
+    <h3 class:list={[
+      'font-bold tracking-tight2 leading-display mb-3 group-hover:underline',
+      featured ? 'text-2xl' : 'text-lg',
+      image ? 'text-navy' : 'text-navy'
+    ]}>
+      {title}
+    </h3>
+    <p class:list={['text-sm leading-relaxed2 tracking-tight2 font-light', image ? 'text-navy/60' : 'text-navy/70']}>
+      {excerpt}
+    </p>
+  </div>
+</a>

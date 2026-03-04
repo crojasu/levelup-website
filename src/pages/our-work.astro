@@ -1,0 +1,54 @@
+---
+import Layout       from '../layouts/Layout.astro';
+import CampaignCard from '../components/CampaignCard.astro';
+import { getCollection } from 'astro:content';
+
+const campaigns = (await getCollection('campaigns'))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const featured  = campaigns.find(c => c.data.featured);
+const secondary = campaigns.filter(c => !c.data.featured);
+---
+
+<Layout
+  title="Our Campaigns — Level Up"
+  description="Sign our petitions and take action on gender justice campaigns including #NoMoreLyes, Pregnancy in Prison, Abortion is Healthcare, and more."
+>
+  <!-- Header -->
+  <section class="bg-black px-16 py-24">
+    <div class="section-label">Take Action</div>
+    <h1 class="text-8xl font-bold tracking-tight2 leading-display text-white mt-2">
+      Our Campaigns
+    </h1>
+    <p class="text-lg font-light text-white/50 tracking-tight2 leading-relaxed2 max-w-xl mt-6">
+      We use digital tools and people-power to interrupt cultural moments and drive systemic change for gender justice.
+    </p>
+  </section>
+
+  <!-- Grid -->
+  <section class="bg-black px-16 pb-24">
+    <div class="grid lg:grid-cols-3 gap-px stagger">
+      {featured && (
+        <CampaignCard
+          title={featured.data.title}
+          excerpt={featured.data.excerpt}
+          supporters={featured.data.supporters}
+          href={`/active-campaigns/${featured.slug}`}
+          emoji={featured.data.emoji}
+          featured={true}
+          status={featured.data.status}
+        />
+      )}
+      {secondary.map(c => (
+        <CampaignCard
+          title={c.data.title}
+          excerpt={c.data.excerpt}
+          supporters={c.data.supporters}
+          href={`/active-campaigns/${c.slug}`}
+          emoji={c.data.emoji}
+          status={c.data.status}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>
