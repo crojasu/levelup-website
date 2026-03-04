@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const campaigns = await getCollection('campaigns');
+  return campaigns.map(c => ({
+    params: { slug: c.slug },
+    props: { campaign: c }
+  }));
+}
+
+const { campaign } = Astro.props;
+const { Content } = await campaign.render();
+const { title, excerpt, supporters, petitionUrl, status } = campaign.data;
+const slug = campaign.slug;
+
+const extraLinks: Record<string, {label: string, href: string}[]> = {
+  'nomorelyes': [
+    { label: '#NoMoreLyes Relaxer Info Kit', href: '/all-resources' },
+    { label: "Sign the open letter to L'Oreal", href: 'https://welevelup.org/nomorelyes-open-letter-to-loreal/' },
+    { label: 'Share your hair story', href: '/contact' },
+  ],
+  'pregnancy-in-prison': [
+    { label: 'Legal Toolkit', href: '/all-resources' },
+    { label: 'Resources', href: '/all-resources' },
+  ],
+  'abortion-is-healthcare': [
+    { label: 'Abortion Stories - Share Your Story', href: 'https://welevelup.org/abortion-stories-complete/' },
+    { label: 'Resources', href: '/all-resources' },
+  ],
+  'media-guidelines-domestic-abuse': [
+    { label: 'Resources', href: '/all-resources' },
+  ],
+  'sexual-violence-in-football': [
+    { label: 'Share your story', href: '/contact' },
+  ],
+  'we-protect-us': [
+    { label: 'Sign up for free training', href: '/contact' },
+  ],
+};
+
+const extras = extraLinks[slug] || [];
+---
+
+<Layout title={`${title} | Level Up`} description={excerpt}>
+
+  <!-- Hero -->
+  <section style="background:#0D0D3B; padding: 96px 0;">
+    <div style="max-width:1280px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div>
+        <p style="color:#C8FF00; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">
+          Active Campaign
+        </p>
+        <h1 style="color:#C8FF00; font-weight:900; line-height:0.95; margin-bottom:24px; font-size:clamp(2.5rem,7vw,5.5rem); letter-spacing:-0.03em;">
+          {title}
+        </h1>
+        {excerpt && (
+          <p style="color:#E8E4D4; font-size:1.1rem; line-height:1.6; margin-bottom:32px; max-width:480px;">
+            {excerpt.slice(0, 200)}...
+          </p>
+        )}
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+          {petitionUrl && (
+            <a href={petitionUrl} target="_blank" rel="noopener"
+              style="background:#C8FF00; color:#0D0D3B; font-weight:800; padding:14px 32px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.07em; text-decoration:none; display:inline-block;">
+              Sign the Petition →
+            </a>
+          )}
+          {extras.map(l => (
+            <a href={l.href}
+              style="border:2px solid #C8FF00; color:#C8FF00; font-weight:700; padding:12px 24px; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.07em; text-decoration:none; display:inline-block;">
+              {l.label}
+            </a>
+          ))}
+        </div>
+        {supporters && (
+          <p style="color:rgba(232,228,212,0.4); font-size:0.85rem; margin-top:24px;">
+            {supporters} supporters
+          </p>
+        )}
+      </div>
+      <!-- Campaign image -->
+      <div>
+        <img
+          src={`/images/campaigns/${slug}.jpg`}
+          alt={title}
+          style="width:100%; aspect-ratio:16/9; object-fit:cover;"
+          onerror="this.style.display='none'"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <article style="background:#E8E4D4; padding:80px 0;">
+    <div style="max-width:780px; margin:0 auto; padding:0 24px; font-family:'DM Sans',sans-serif; font-size:1.05rem; line-height:1.75; color:#0D0D3B;">
+      <Content />
+    </div>
+  </article>
+
+  <!-- Bottom CTA -->
+  <section style="background:#0D0D3B; padding:64px 0; text-align:center;">
+    {petitionUrl && (
+      <a href={petitionUrl} target="_blank" rel="noopener"
+        style="background:#C8FF00; color:#0D0D3B; font-weight:800; padding:16px 40px; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.07em; text-decoration:none; display:inline-block; margin-bottom:20px;">
+        Sign the Petition →
+      </a>
+    )}
+    <div style="margin-top:16px;">
+      <a href="/our-work" style="color:rgba(232,228,212,0.4); font-size:0.85rem; text-decoration:none;">
+        ← All Campaigns
+      </a>
+    </div>
+  </section>
+
+</Layout>
