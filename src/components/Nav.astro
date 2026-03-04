@@ -1,42 +1,139 @@
 ---
-const navLinks = [
-  { label: 'About Us', href: '/about-us' },
-  { label: 'Campaigns', href: '/our-work' },
-  { label: 'Resources', href: '/all-resources' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Press', href: '/press' },
-  { label: 'Community', href: '#community' },
-  { label: 'Contact', href: '/contact' },
+const campaigns = [
+  {
+    name: 'Media Guidelines',
+    slug: 'media-guidelines-domestic-abuse',
+    links: [
+      { label: 'Sign the petition', href: 'https://levelup.yourmovement.org/p/dignity-for-dead-women' },
+      { label: 'Resources', href: '/all-resources' },
+    ]
+  },
+  {
+    name: 'Pregnancy in Prison',
+    slug: 'pregnancy-in-prison',
+    links: [
+      { label: 'Sign the petition', href: 'https://levelup.yourmovement.org/p/pregnancy-in-prison' },
+      { label: 'Resources', href: '/all-resources' },
+      { label: 'Legal Toolkit', href: '/all-resources' },
+    ]
+  },
+  {
+    name: 'Sexual Violence in Football',
+    slug: 'sexual-violence-in-football',
+    links: [
+      { label: 'Sign the petition', href: 'https://levelup.yourmovement.org/p/sexual-violence-in-football' },
+      { label: 'Share your story', href: '/contact' },
+    ]
+  },
+  {
+    name: 'Abortion is Healthcare',
+    slug: 'abortion-is-healthcare',
+    links: [
+      { label: 'Sign the petition', href: 'https://levelup.yourmovement.org/p/abortion-is-healthcare' },
+      { label: 'Abortion Stories – Share Your Story', href: 'https://welevelup.org/abortion-stories-complete/' },
+      { label: 'Resources / Media Guidelines', href: '/all-resources' },
+    ]
+  },
+  {
+    name: 'No More Lyes',
+    slug: 'nomorelyes',
+    links: [
+      { label: 'Sign the petition', href: 'https://levelup.yourmovement.org/p/no-more-lyes' },
+      { label: '#NoMoreLyes Relaxer Info Kit', href: '/all-resources' },
+      { label: "Sign the open letter to L'Oréal", href: 'https://welevelup.org/nomorelyes-open-letter-to-loreal/' },
+      { label: 'Share your hair story', href: '/contact' },
+    ]
+  },
+  {
+    name: 'We Protect Us',
+    slug: 'we-protect-us',
+    links: [
+      { label: 'Sign up for trainings', href: '/active-campaigns/we-protect-us' },
+    ]
+  },
 ];
 ---
 
 <header class="bg-cream border-b border-navy/10 sticky top-0 z-50">
   <nav class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-1 font-bold text-navy tracking-tight text-lg">
+    <a href="/" class="flex items-center gap-1 font-bold text-navy tracking-tight text-lg shrink-0">
       <span>WE</span>
       <span class="bg-lime text-navy px-1">LEVEL UP</span>
     </a>
 
     <!-- Nav links -->
-    <ul class="hidden lg:flex items-center gap-6">
-      {navLinks.map(link => (
-        <li>
-          <a href={link.href} class="text-navy text-sm font-medium hover:opacity-70 uppercase tracking-wide transition-opacity">
-            {link.label}
-          </a>
-        </li>
-      ))}
+    <ul class="hidden lg:flex items-center gap-5">
+
+      <!-- About Us -->
+      <li class="relative group">
+        <button class="text-navy text-sm font-medium hover:opacity-70 uppercase tracking-wide flex items-center gap-1">
+          About Us <span class="text-xs">▾</span>
+        </button>
+        <div class="absolute top-full left-0 bg-white border border-navy/10 shadow-lg p-4 min-w-[160px] hidden group-hover:block">
+          <a href="/about-us" class="block text-sm text-navy hover:text-purple py-1">What we do</a>
+          <a href="/about-us#team" class="block text-sm text-navy hover:text-purple py-1">Meet our Team</a>
+          <a href="/about-us#proud" class="block text-sm text-navy hover:text-purple py-1">What we're proud of</a>
+        </div>
+      </li>
+
+      <!-- Campaigns mega menu -->
+      <li class="relative group">
+        <button class="text-navy text-sm font-medium hover:opacity-70 uppercase tracking-wide flex items-center gap-1">
+          Campaigns <span class="text-xs">▾</span>
+        </button>
+        <div class="absolute top-full left-1/2 -translate-x-1/2 bg-white border border-navy/10 shadow-xl p-6 hidden group-hover:grid grid-cols-3 gap-8 min-w-[700px]">
+          {campaigns.map(c => (
+            <div>
+              <a href={`/active-campaigns/${c.slug}`} class="block text-sm font-bold text-navy uppercase tracking-wide mb-2 hover:text-purple">
+                {c.name}
+              </a>
+              {c.links.map(l => (
+                <a href={l.href} class="block text-sm text-navy/70 hover:text-navy py-0.5">{l.label}</a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </li>
+
+      <li><a href="/all-resources" class="text-navy text-sm font-medium hover:opacity-70 uppercase tracking-wide">Resources</a></li>
+
+      <!-- Blog -->
+      <li class="relative group">
+        <button class="text-navy text-sm font-medium hover:opacity-70 uppercase tracking-wide flex items-center gap-1">
+          Blog <span class="text-xs">▾</span>
+        </button>
+        <div class="absolute top-full left-0 bg-white border border-navy/10 shadow-lg p-4 min-w-[160px] hidden group-hover:block">
+          <a href="/blog" class="block text-sm text-navy hover:text-purple py-1">All posts</a>
+        </div>
+      </li>
+
+      <li><a href="/press" class="text-navy text-sm font-medium hover:opacity-70 uppercase tracking-wide">Press Coverage</a></li>
+
+      <!-- Community -->
+      <li class="relative group">
+        <button class="text-navy text-sm font-medium hover:opacity-70 uppercase tracking-wide flex items-center gap-1">
+          Community <span class="text-xs">▾</span>
+        </button>
+        <div class="absolute top-full left-0 bg-white border border-navy/10 shadow-lg p-4 min-w-[200px] hidden group-hover:block">
+          <a href="/active-campaigns/we-protect-us" class="block text-sm text-navy hover:text-purple py-1">We Protect Us Training</a>
+          <a href="/contact" class="block text-sm text-navy hover:text-purple py-1">Join the Community</a>
+        </div>
+      </li>
+
+      <li><a href="/contact" class="text-navy text-sm font-medium hover:opacity-70 uppercase tracking-wide">Contact</a></li>
     </ul>
 
     <!-- CTAs -->
-    <div class="flex items-center gap-3">
-      <a href="/contact" class="hidden md:block text-sm font-semibold text-navy border border-navy px-4 py-2 hover:bg-navy hover:text-cream transition-colors uppercase tracking-wide">
-        Join Us
-      </a>
-      <a href="/donate" class="text-sm font-semibold bg-navy text-lime px-4 py-2 hover:bg-navy/80 transition-colors uppercase tracking-wide">
+    <div class="flex items-center gap-3 shrink-0">
+      <a href="/donate" class="text-sm font-bold bg-navy text-lime px-5 py-2 hover:bg-navy/80 transition-colors uppercase tracking-wide">
         Donate
       </a>
+      <a href="/contact" class="hidden md:block text-sm font-bold text-navy border-2 border-navy px-5 py-2 hover:bg-navy hover:text-cream transition-colors uppercase tracking-wide">
+        Join Us
+      </a>
     </div>
+
   </nav>
 </header>
